@@ -13,10 +13,11 @@ console = Console()
 
 def validate_env():
     """Check that required env vars are set before running."""
-    key = os.getenv("ANTHROPIC_API_KEY")
-    if not key or key == "sk-ant-api03-xxxxxxxxxxxxxxxx":
-        console.print("\n[red]❌ ANTHROPIC_API_KEY not set in .env[/red]")
-        console.print("Get your key at: [link]https://console.anthropic.com[/link]")
+    key = os.getenv("GOOGLE_API_KEY")
+    # Checks for empty key or common placeholder strings
+    if not key or "your-google-key-here" in key:
+        console.print("\n[red]❌ GOOGLE_API_KEY not set in .env[/red]")
+        console.print("Get your key at: [link]https://aistudio.google.com/app/apikey[/link]")
         sys.exit(1)
 
 

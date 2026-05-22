@@ -8,7 +8,7 @@ load_dotenv()
 
 
 gemini_llm = LLM(
-    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-1.5-flash')}",
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-pro-latest')}",
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
@@ -28,7 +28,7 @@ def create_writer_agent() -> Agent:
         ),
         tools=[write_file],
         llm=gemini_llm,  # <-- Wired specifically to Google
-        max_iter=4,
+        max_iter=2,
         verbose=True,
     )
 

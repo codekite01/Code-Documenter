@@ -10,7 +10,7 @@ load_dotenv()
 
 gemini_llm = LLM(
     
-    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-1.5-flash')}",
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-pro-latest')}",
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
@@ -31,7 +31,7 @@ def create_explorer_agent() -> Agent:
         ),
         tools=[clone_repository, map_directory_tree, get_dependencies],
         llm=gemini_llm,  # <-- Wired specifically to Google
-        max_iter=5,
+        max_iter=3,
         max_rpm=4,
         verbose=True,
     )
