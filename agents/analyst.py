@@ -1,11 +1,16 @@
 import os
-from crewai import Agent, Task
+from crewai import Agent, Task, LLM
 from tools.file_tools import read_file_safe
 from tools.github_tools import get_dependencies
 from models.schemas import RepoMap, ArchitectureReport
 from dotenv import load_dotenv
 
 load_dotenv()
+
+gemini_llm = LLM(
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-1.5-flash')}",
+    api_key=os.getenv("GOOGLE_API_KEY")
+)
 
 
 def create_analyst_agent() -> Agent:
@@ -23,7 +28,7 @@ def create_analyst_agent() -> Agent:
             "external services it depends on, and what a new developer would need to know."
         ),
         tools=[read_file_safe, get_dependencies],
-        llm=os.getenv("MODEL_NAME", "claude-sonnet-4-20250514"),
+        llm=gemini_llm,  # <-- Wired specifically to Google
         max_iter=8,
         verbose=True,
     )

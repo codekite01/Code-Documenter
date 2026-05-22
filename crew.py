@@ -75,7 +75,7 @@ def run_documenter(repo_url: str, output_path: str = "./output/README.md") -> st
 if __name__ == "__main__":
     # Quick test: run directly with python crew.py
     result = run_documenter(
-        repo_url="https://github.com/tiangolo/fastapi",
+        repo_url="https://github.com/ditikrushna/End-to-End-Diabetes-Prediction-Application-Using-Machine-Learning",
         output_path="./output/fastapi_README.md"
     )
     print(f"\n✅ Done! README saved to: {result}")

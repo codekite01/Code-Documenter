@@ -1,10 +1,16 @@
 import os
-from crewai import Agent, Task
+from crewai import Agent, Task, LLM
 from tools.file_tools import write_file
 from models.schemas import RepoMap, ArchitectureReport
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
+gemini_llm = LLM(
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-1.5-flash')}",
+    api_key=os.getenv("GOOGLE_API_KEY")
+)
 
 
 def create_writer_agent() -> Agent:
@@ -21,7 +27,7 @@ def create_writer_agent() -> Agent:
             "and are formatted beautifully in Markdown."
         ),
         tools=[write_file],
-        llm=os.getenv("MODEL_NAME", "claude-sonnet-4-20250514"),
+        llm=gemini_llm,  # <-- Wired specifically to Google
         max_iter=4,
         verbose=True,
     )

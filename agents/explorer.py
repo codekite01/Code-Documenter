@@ -1,5 +1,5 @@
 import os
-from crewai import Agent, Task
+from crewai import Agent, Task, LLM
 from tools.git_tools import clone_repository, map_directory_tree
 from tools.github_tools import get_dependencies
 from models.schemas import RepoMap
@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+gemini_llm = LLM(
+    
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-1.5-flash')}",
+    api_key=os.getenv("GOOGLE_API_KEY")
+)
 
 def create_explorer_agent() -> Agent:
     return Agent(
@@ -24,7 +30,7 @@ def create_explorer_agent() -> Agent:
             "most — just from directory structure and file names."
         ),
         tools=[clone_repository, map_directory_tree, get_dependencies],
-        llm=os.getenv("MODEL_NAME", "claude-sonnet-4-20250514"),
+        llm=gemini_llm,  # <-- Wired specifically to Google
         max_iter=5,
         max_rpm=4,
         verbose=True,
