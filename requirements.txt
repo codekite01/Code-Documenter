@@ -1,11 +1,8 @@
 crewai
 crewai-tools
-anthropic
 gitpython
 PyGithub
-tiktoken
 pydantic
 python-dotenv
-rich
 pytest
 pytest-asyncio

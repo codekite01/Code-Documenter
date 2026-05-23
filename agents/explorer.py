@@ -10,7 +10,7 @@ load_dotenv()
 
 gemini_llm = LLM(
     
-    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-pro-latest')}",
+    model=f"gemini/{os.getenv('MODEL_NAME', 'gemini-3-flash-live')}",
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
